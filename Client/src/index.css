@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.no-style {
+  list-style: none;
+  text-decoration: none;
+  color: rgb(253, 253, 253);
+}

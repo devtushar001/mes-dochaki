@@ -1,0 +1,156 @@
+.updated-raw-material {
+    max-width: 85vw;
+    margin: 30px auto;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.updated-raw-material .updated-controll-form-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updated-raw-material .updated-controll-form-btn input,
+.updated-raw-material .updated-controll-form-btn button {
+    height: 32px;
+}
+
+.updated-raw-material .updated-controll-form-btn input {
+    width: 340px;
+}
+
+.table-container {
+    width: 85vw;
+}
+
+.table-container .table-header,
+.table-container .table-body {
+    display: grid;
+    margin-top: 50px;
+    grid-template-columns: 0.4fr 1fr 0.5fr 1fr 0.2fr 0.3fr 1fr;
+    gap: 5px;
+}
+
+.table-container .table-header {
+    border: 1px solid saddlebrown;
+    padding: 7px 12px;
+
+}
+
+.table-container .table-header span {
+    border: 1px solid seagreen;
+    padding: 7px 12px;
+    border-radius: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-container .table-body span {
+    border: 1px solid salmon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+}
+
+.table-container img {
+    width: 80%;
+}
+
+.edit-in-out {
+    width: 100%;
+    top: 30px;
+    position: fixed;
+    min-height: 100%;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #42424231;
+    backdrop-filter: blur(5px);
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.edit-in-out .container {
+    margin-top: 50px;
+    padding: 20px;
+    position: relative;
+    background: #fff8f8;
+    border: 1px solid saddlebrown;
+}
+
+.edit-in-out .container .product-details {
+    display: flex;
+    gap: 12px;
+}
+
+.edit-in-out .container .close {
+    position: absolute;
+    top: 35px;
+    cursor: pointer;
+    right: 20px;
+}
+
+.edit-in-out .container .input-system {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.edit-in-out .container .input-system select,
+.edit-in-out .container .input-system input,
+.edit-in-out .container .input-system button {
+    height: 28px;
+
+}
+
+.updated-table .updated-table-dark tr td img {
+    width: 57px;
+}
+
+.updated-add-new-raw-material {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.updated-add-new-raw-material textarea {
+    height: 250px;
+}
+
+.updated-add-new-raw-material .updated-material-name {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 32px;
+    gap: 10px;
+}
+
+
+@media (max-width: 680px) {
+    .updated-raw-material .updated-controll-form-btn {
+        flex-direction: column;
+    }
+
+    .updated-raw-material .updated-controll-form-btn input,
+    .updated-raw-material .updated-controll-form-btn button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .table-container .table-header,
+    .table-container .table-body {
+        display: grid;
+        margin-top: 50px;
+        grid-template-columns: 1fr;
+    }
+
+    .updated-add-new-raw-material .updated-material-name {
+        grid-template-columns: 1fr;
+        margin-bottom: 10px;
+    }
+}

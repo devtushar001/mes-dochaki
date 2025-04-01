@@ -1,0 +1,14 @@
+.home-container {
+    max-width: 85vw;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.home-container .raw,
+.home-container .stock {
+    min-width: 120px;
+    min-height: 32px;
+    cursor: pointer;
+}

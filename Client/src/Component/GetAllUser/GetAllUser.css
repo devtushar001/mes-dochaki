@@ -1,0 +1,25 @@
+.all-user {
+    min-width: 89vw;
+    margin: 30px auto;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.all-user .user-data-cont {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    gap: 12px;
+    border: 1px solid gray;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.all-user .user-data-cont span {
+    margin-top: 12px;
+}
+
+@media (max-width: 680px) {
+    .all-user .user-data-cont {
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+    }
+}

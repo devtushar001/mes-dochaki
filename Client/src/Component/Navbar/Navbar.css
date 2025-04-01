@@ -1,0 +1,108 @@
+/* Navbar Styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #09918a, #066a64);
+  color: white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Logo Styling */
+.navbar .nav-logo img {
+  max-height: 60px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar .nav-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation Menu */
+.navbar .nav-menu {
+  display: flex;
+}
+
+.navbar .nav-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-menu ul li {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out, transform 0.2s;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.navbar .nav-menu ul li:hover {
+  color: #ffcc00;
+  transform: translateY(-2px);
+}
+
+.navbar .menu_icon {
+  display: none;
+  background: #ffcc00;
+  color: #222;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar .menu_icon:hover {
+  background: #e6b800;
+}
+
+/* Responsive Navbar for Mobile */
+@media (max-width: 900px) {
+  .navbar .nav-menu {
+    position: absolute;
+    top: 95px;
+    right: -100%;
+    background: rgba(0, 0, 0, 0.9);
+    width: 50%;
+    display: flex;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: right 0.4s ease-in-out;
+  }
+
+  .navbar .nav-menu.open {
+    right: 0;
+  }
+
+  .navbar .nav-menu ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .navbar .nav-menu ul li {
+    font-size: 20px;
+    /* padding: 15px 0; */
+    /* width: 80%; */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .navbar .menu_icon {
+    display: block;
+  }
+}

@@ -1,0 +1,152 @@
+.login-signup {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9000;
+}
+
+
+.login-signup .auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #e0f7f7;
+    position: relative;
+}
+
+.login-signup .auth-container .otp {
+    background: #f9fffe;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.login-signup .auth-container .otp .otp-box {
+    width: 320px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    height: 35px;
+}
+
+.login-signup .auth-container .otp .otp-box input {
+    outline: none;
+    border: 1px solid #0fa79f;
+    padding-left: 12px;
+}
+
+.login-signup .auth-container .otp .otp-box input:focus {
+    border-color: #38b2ac;
+}
+
+.login-signup .auth-container .otp .otp-box button {
+    cursor: pointer;
+    border: 1px solid #0fa79f;
+    background-color: #0fa79f;
+    color: #fff;
+}
+
+.login-signup .auth-container .auth-box {
+    display: flex;
+    max-width: 80vw;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.login-signup .auth-container .auth-left {
+    width: 50%;
+    background-color: #38b2ac;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-signup .auth-container .auth-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.login-signup .auth-container .auth-right h2 {
+    color: #38b2ac;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.login-signup .auth-container .auth-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.login-signup .auth-container .auth-input:focus {
+    border-color: #38b2ac;
+}
+
+.login-signup .auth-container .auth-button {
+    width: 100%;
+    background-color: #38b2ac;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-signup .auth-container .auth-button:hover {
+    background-color: #319795;
+}
+
+.login-signup .auth-container .auth-toggle {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.login-signup .auth-container .auth-toggle button {
+    background: none;
+    border: none;
+    color: #38b2ac;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.login-signup .auth-container .auth-toggle button:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 680px) {
+    .login-signup .auth-container .auth-box {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 80vw;
+    }
+
+    .login-signup .auth-container .auth-left {
+        width: 100%;
+    }
+    .login-signup .auth-container .auth-right {
+        width: 80%;
+    }
+ 
+}

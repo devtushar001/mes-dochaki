@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect, useMemo } from "react";
 export const MesContext = createContext(null);
 
 const MesContextProvider = ({ children }) => {
-    const backend_url = "https://mes-dochaki-backend.onrender.com";
+    const backend_url = "http://localhost:10019";
     const [rawMaterials, setRawMaterials] = useState([]);
     const [loginSignup, setLoginSignup] = useState(true);
     const [userData, setUserData] = useState({});

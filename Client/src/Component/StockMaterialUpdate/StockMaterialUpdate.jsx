@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { MesContext } from "../../Context/MesContextProvider";
 
 const StockMaterialUpdate = () => {
-    const { readDate, backend_url } = useContext(MesContext);
+    const { readDate, backend_url, token } = useContext(MesContext);
     const [fetchedData, setFetchedData] = useState([]);
     const [inputDate, setInputDate] = useState(getCurrentDate());
 
@@ -19,7 +19,7 @@ const StockMaterialUpdate = () => {
         try {
             const res = await fetch(`${backend_url}/api/stock-material-update/get-update/${inputDate}`, {
                 method: "GET",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, },
             });
 
             if (!res.ok) throw new Error("Failed to fetch recent updates");

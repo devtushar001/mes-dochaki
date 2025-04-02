@@ -3,13 +3,13 @@ import './StockMaterial.css';
 import ImageUploader from "../../Component/ImageUploader/ImageUploader";
 import { MesContext } from "../../Context/MesContextProvider";
 import { toast } from "react-toastify";
-import StockMaterialUpdate from '../../Component/StockMaterialUpdate/StockMaterialUpdate'
+// import StockMaterialUpdate from '../../Component/StockMaterialUpdate/StockMaterialUpdate'
 
 const UpdatedRawMaterial = () => {
     const [addNew, setAddNew] = useState(false);
     const [inOUt, setInOut] = useState(false);
     const [productId, setProductId] = useState("");
-    const { backend_url, rawMaterials, setRawMaterials } = useContext(MesContext);
+    const { backend_url, rawMaterials, setRawMaterials, token, setLoginSignup } = useContext(MesContext);
     const [productImage, setProductImage] = useState({ type: "single", selection: false, image: null });
     const [rawData, setRawData] = useState({
         materialName: "",
@@ -30,10 +30,11 @@ const UpdatedRawMaterial = () => {
     })
 
     const fetchProduct = async () => {
+        if (!token) setLoginSignup(true);
         try {
             const res = await fetch(`${backend_url}/api/stock-material/get?query=${searchQuery}`, {
                 method: 'GET',
-                headers: { 'Content-Type': "application/json" }
+                headers: { 'Content-Type': "application/json", Authorization: `Bearer ${token}` }
             });
 
             if (!res.ok) throw new Error("Failed to fetch raw materials");
@@ -57,10 +58,11 @@ const UpdatedRawMaterial = () => {
     }, [backend_url, searchQuery]);
 
     const createRawProduct = async () => {
+        if (!token) setLoginSignup(true)
         try {
             const res = await fetch(`${backend_url}/api/stock-material/create`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
                 body: JSON.stringify(rawData)
             });
 
@@ -84,9 +86,14 @@ const UpdatedRawMaterial = () => {
     };
 
     const deleteRawProduct = async (id) => {
+        if (!token) setLoginSignup(true)
         try {
             const res = await fetch(`${backend_url}/api/stock-material/delete/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
             });
 
             if (!res.ok) throw new Error("Failed to delete product");
@@ -115,11 +122,13 @@ const UpdatedRawMaterial = () => {
     };
 
     const updateRawMaterial = async () => {
+        if (!token) setLoginSignup(true);
         try {
             const res = await fetch(`${backend_url}/api/stock-material-update/update`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': "application/json"
+                    'Content-Type': "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(data)
             });

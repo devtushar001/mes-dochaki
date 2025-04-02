@@ -23,7 +23,8 @@ const LoginSignUp = () => {
 
     const getUserData = async () => {
         if (!token) {
-            toast.error("Authorization token is missing!");
+            setLoginSignup(true);
+            toast.warning("Authorization token is missing!");
             return;
         }
 
@@ -41,11 +42,8 @@ const LoginSignUp = () => {
                 toast.error(data.message || "Failed to fetch user data");
                 return;
             }
-
-            toast.success("User data fetched successfully!");
             setLoginSignup(false)
         } catch (error) {
-            console.error("Error fetching user data:", error);
             toast.error("Failed to fetch user data. Please try again.");
         }
     };
@@ -150,8 +148,7 @@ const LoginSignUp = () => {
             setOtp(false);
             isLogin(true);
         } catch (error) {
-            console.error("Error during OTP verification:", error);
-            toast.error("OTP verification failed. Please try again.");
+            toast.error(error.name);
         }
     };
 

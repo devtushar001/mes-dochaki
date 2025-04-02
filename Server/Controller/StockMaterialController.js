@@ -1,7 +1,27 @@
 import StockModel from "../Models/StockModel.js";
+import UserModel from "../Models/UserModel.js";
 export const AddStockMaterialController = async (req, res) => {
     try {
+        ;
         const { materialName, imageUrl, description, quantity, color } = req.body;
+        const userId = req.user;
+
+        if (!userId) {
+            return res.status(404).json({
+                success: false,
+                message: `User not authorized.`
+            })
+        }
+
+        const userData = await UserModel.findById(userId);
+
+        if (!userData || !userData.isVerified || !userData.access) {
+            return res.status(400).json({ 
+                success: false,
+                message: `You have no access to edit these things.`
+            })
+        }
+
         if (!materialName) {
             return res.status(400).json({
                 success: false,

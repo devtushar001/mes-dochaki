@@ -109,7 +109,7 @@ export const UserLoginController = async (req, res) => {
         }
 
         if (!user.isVerified || !user.access) {
-            return res.status(403).json({ message: "Account not verified. Please verify your email first." });
+            return res.status(403).json({ message: "You are not dochaki mes member yet, please wait or contact to developer." });
         }
 
         const token = jwt.sign(
@@ -391,7 +391,7 @@ export const UserDeleteController = async (req, res) => {
                 message: "This person is not available in the database."
             });
         }
-        
+
         return res.status(200).json({
             success: true,
             message: "Person deleted successfully.",
@@ -399,7 +399,7 @@ export const UserDeleteController = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error in UserDeleteController:", error); 
+        console.error("Error in UserDeleteController:", error);
 
         return res.status(500).json({
             success: false,

@@ -3,7 +3,7 @@ import "./RawMaterialUpdate.css";
 import { MesContext } from "../../Context/MesContextProvider";
 
 const RawMaterialUpdate = () => {
-    const { readDate, backend_url } = useContext(MesContext);
+    const { readDate, backend_url, token } = useContext(MesContext);
     const [fetchedData, setFetchedData] = useState([]);
     const [inputDate, setInputDate] = useState(getCurrentDate());
 
@@ -19,7 +19,7 @@ const RawMaterialUpdate = () => {
         try {
             const res = await fetch(`${backend_url}/api/update-raw/get-update/${inputDate}`, {
                 method: "GET",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, },
             });
 
             if (!res.ok) throw new Error("Failed to fetch recent updates");
@@ -70,13 +70,13 @@ const RawMaterialUpdate = () => {
                         {fetchedData.map((update) => (
                             <>
                                 <div key={update._id} className="table-body">
-                                <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                    <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                                         <img style={{ maxWidth: "45px" }} src={update.ProductData.image} alt="" />
                                         {update.ProductData.name}
                                     </span>
-                                    <span>{update.changeType.charAt(0).toUpperCase() + update.changeType.slice(1)} {update.changeType === "out" ? "on":"from"} {update.issuedType} placed to {update.message}</span>
-                                    <span style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>{update.quantity} {update.changeType} </span>
-                                    <span style={{display: "flex", alignItems: "center", justifyContent: "center"}}>{update.currentQuantity}</span>
+                                    <span>{update.changeType.charAt(0).toUpperCase() + update.changeType.slice(1)} {update.changeType === "out" ? "on" : "from"} {update.issuedType} placed to {update.message}</span>
+                                    <span style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>{update.quantity} {update.changeType} </span>
+                                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>{update.currentQuantity}</span>
                                     <span>{readDate(update.updatedAt)}</span>
                                 </div>
                                 <hr />

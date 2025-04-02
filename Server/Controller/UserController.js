@@ -108,7 +108,7 @@ export const UserLoginController = async (req, res) => {
         }
 
         if (!user.isVerified || !user.access) {
-            return res.status(403).json({ message: "You are not dochaki mes member yet, please wait or contact to developer." });
+            return res.status(403).json({ message: "Not a Dochaki MES member. Wait or contact the developer." });
         }
 
         const token = jwt.sign(

@@ -60,9 +60,9 @@ const StockMaterialUpdate = () => {
                     <div className="table">
                         <div className="table-head">
                             <span>Product Name</span>
-                            <span>Change Type</span>
-                            <span>Quantity</span>
-                            <span>Current Quantity</span>
+                            <span>Message</span>
+                            <span>In/Out Qty</span>
+                            <span>Curr. Qty</span>
                             <span>Updated At</span>
                         </div>
                         {fetchedData.map((update) => (
@@ -72,9 +72,9 @@ const StockMaterialUpdate = () => {
                                         <img style={{ maxWidth: "45px" }} src={update.ProductData.image} alt="" />
                                         {update.ProductData.name}
                                     </span>
-                                    <span>{update.changeType.toLowerCase()}</span>
-                                    <span>  {update.quantity} {update.changeType === "in" ? "in" : "out"}</span>
-                                    <span>{update.currentQuantity}</span>
+                                    <span>{update.changeType.charAt(0).toUpperCase() + update.changeType.slice(1)} {update.changeType === "out" ? "on" : "from"} {update.saleType} placed to {update.message}</span>
+                                    <span style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>{update.quantity} {update.changeType} </span>
+                                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>{update.currentQuantity}</span>
                                     <span>{readDate(update.updatedAt)}</span>
                                 </div>
                                 <hr />

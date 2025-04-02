@@ -294,6 +294,7 @@ const UpdatedRawMaterial = () => {
                             <option value="flipkart">FlipKart</option>
                             <option value="dmototech">Dmototeh</option>
                             <option value="offline">Offline</option>
+                            <option value="raw">Raw</option>
                         </select>
                         <input onChange={(e) => setData(prev => ({ ...prev, message: e.target.value }))} type="text" placeholder="Type message" />
                         <input onChange={(e) => setData((prev) => ({ ...prev, quantity: Number(e.target.value) }))} type="number" name="quantity" id="quantity" placeholder="Quantity" />

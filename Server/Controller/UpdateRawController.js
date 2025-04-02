@@ -1,11 +1,21 @@
 import RawModel from "../Models/RawModel.js";
 import UpdateRawModel from "../Models/UpdateRawModel.js";
+import UserModel from "../Models/UserModel.js";
 
 export const CreateUpdateRawController = async (req, res) => {
-    console.log(req.body)
+
     try {
 
         let { ProductId, changeType, quantity, issuedType, message } = req.body;
+
+        const userData = await UserModel.findById(req.user);
+        console.log(userData);
+        if (!userData || !userData.access || !userData.isVerified) {
+            return res.status(404).json({
+                success: false,
+                message: `You are not authenticated user.`
+            })
+        }
 
         if (!ProductId || !changeType || !quantity) {
             return res.status(400).json({

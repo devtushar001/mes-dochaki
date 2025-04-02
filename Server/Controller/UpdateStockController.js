@@ -1,11 +1,18 @@
 import StockModel from "../Models/StockModel.js";
 import UpdateStockModel from "../Models/UpdateStockModel.js";
+import UserModel from "../Models/UserModel.js";
 
 export const CreateUpdateStockController = async (req, res) => {
     try {
 
         let { ProductId, changeType, quantity, saleType, message } = req.body;
-
+        const userData = await UserModel.findById(req.user);
+        if (!userData || !userData.access || !userData.isVerified) {
+            return res.status(404).json({
+                success: false,
+                message: `You are not authenticated user.`
+            })
+        }
         if (!ProductId || !changeType || !quantity) {
             return res.status(400).json({
                 success: false,

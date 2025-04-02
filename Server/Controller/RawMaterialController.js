@@ -1,8 +1,17 @@
 import RawModel from "../Models/RawModel.js";
+import UserModel from "../Models/UserModel.js";
 
 export const AddRawMaterialController = async (req, res) => {
+    console.log(req.user)
     try {
         const { materialName, imageUrl, description, quantity, color } = req.body;
+        const userData = await UserModel.findById(req.user);
+        if (!userData || !userData.access || !userData.isVerified) {
+            return res.status(404).json({
+                success: false,
+                message: `You are not authenticated user.`
+            })
+        }
         if (!materialName) {
             return res.status(400).json({
                 success: false,
@@ -16,7 +25,6 @@ export const AddRawMaterialController = async (req, res) => {
                 message: "Quantity cannot be negative."
             });
         }
-
         const newRawProduct = await RawModel.create({
             materialName,
             imageUrl: imageUrl || "https://surl.li/raobve",
@@ -79,6 +87,13 @@ export const deleteRawMaterialController = async (req, res) => {
     try {
         const { id } = req.params;
         const deletedMaterial = await RawModel.findByIdAndDelete(id);
+        const userData = await UserModel.findById(req.user);
+        if (!userData || !userData.access || !userData.isVerified) {
+            return res.status(404).json({
+                success: false,
+                message: `You are not authenticated user.`
+            })
+        }
 
         if (!deletedMaterial) {
             return res.status(404).json({

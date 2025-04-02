@@ -4,19 +4,16 @@ export const AddStockMaterialController = async (req, res) => {
     try {
         ;
         const { materialName, imageUrl, description, quantity, color } = req.body;
-        const userId = req.user;
-
-        if (!userId) {
+        const userData = await UserModel.findById(req.user);
+        if (!userData || !userData.access || !userData.isVerified) {
             return res.status(404).json({
                 success: false,
-                message: `User not authorized.`
+                message: `You are not authenticated user.`
             })
         }
 
-        const userData = await UserModel.findById(userId);
-
         if (!userData || !userData.isVerified || !userData.access) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
                 message: `You have no access to edit these things.`
             })
@@ -97,7 +94,17 @@ export const getStockMaterialController = async (req, res) => {
 export const deleteStockMaterialController = async (req, res) => {
     try {
         const { id } = req.params;
+        const userData = await UserModel.findById(req.user);
+        if (!userData || !userData.access || !userData.isVerified) {
+            return res.status(404).json({
+                success: false,
+                message: `You are not authenticated user.`
+            })
+        }
+
+
         const deletedMaterial = await StockModel.findByIdAndDelete(id);
+
 
         if (!deletedMaterial) {
             return res.status(404).json({

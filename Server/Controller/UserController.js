@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import UserModel from "../Models/UserModel.js";
 import { sendOtpEmail } from "../Config/NodeMailler.js";
 import dotenv from 'dotenv';
-import { connect } from "mongoose";
 dotenv.config();
 
 export const UserRegistrationController = async (req, res) => {

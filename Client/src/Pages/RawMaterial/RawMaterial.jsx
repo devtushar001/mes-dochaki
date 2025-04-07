@@ -167,6 +167,43 @@ const UpdatedRawMaterial = () => {
         }
     };
 
+    const updateRawProductsData = async (productId) => {
+        if (!productId) {
+            return alert(`Product ID not provided`);
+        }
+
+        if (!token) {
+            alert(`Please login before editing product details`);
+            setLoginSignup(true);
+            return;
+        }
+
+        try {
+            const res = await fetch(`${backend_url}/api/raw-material/update`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ productId, ...rawData })
+            });
+     console.log(res)
+            if (!res.ok) throw new Error(`Something went wrong. Please check your console.`);
+
+            const result = await res.json();
+
+            if (!result.success) {
+                alert(result.message);
+                return;
+            }
+
+            toast.success(result.message);
+            fetchProduct(); // refresh the data
+        } catch (error) {
+            console.error(error.name + ": " + error.message);
+        }
+    };
+
 
     return (
         <>
@@ -332,21 +369,42 @@ const UpdatedRawMaterial = () => {
                     {rawMaterials.map((item) =>
                         item._id === productEdit.productId ? (
                             <div key={item._id} className="editing-box-container">
-                                <div onClick={() => { setProductEdit((prev) => ({ ...prev, action: false })) }} className="close">X</div>
+                                <div onClick={() => setProductEdit((prev) => ({ ...prev, action: false }))} className="close">X</div>
                                 <div className="div">
-                                    <span>Product Image</span><img src={item.imageUrl} alt="" />
-                                    <span>Material Name</span><input onChange={(e) => { setRawData((prev) => ({ ...prev, materialName: e.target.value })) }} value={rawData.materialName || item.name} type="text" placeholder="Material name" />
-                                    <span>Color </span><input type="text" value={item.color} />
-                                    {/* <span>Quantity </span><input type="text" value={item.quantity} /> */}
-                                    <span>Searching Keywords</span> <textarea style={{ fontFamily: "Arial" }} type="text" value={item.description} ></textarea>
+                                    <span>Product Image</span>
+                                    <img src={item.imageUrl} alt="Product" />
+
+                                    <span>Material Name</span>
+                                    <input
+                                        onChange={(e) => setRawData((prev) => ({ ...prev, materialName: e.target.value }))}
+                                        value={rawData.materialName || item.materialName}
+                                        type="text"
+                                        placeholder="Material name"
+                                    />
+
+                                    <span>Color</span>
+                                    <input
+                                        onChange={(e) => setRawData((prev) => ({ ...prev, color: e.target.value }))}
+                                        value={rawData.color || item.color}
+                                        type="text"
+                                        placeholder="Color"
+                                    />
+
+                                    <span>Searching Keywords</span>
+                                    <textarea
+                                        style={{ fontFamily: "Arial" }}
+                                        onChange={(e) => setRawData((prev) => ({ ...prev, description: e.target.value }))}
+                                        value={rawData.description || item.description}
+                                        placeholder="Description"
+                                    />
                                 </div>
-                                <button className="btn-submit">Edit Raw Item</button>
+
+                                <button className="btn-submit" onClick={() => updateRawProductsData(item._id)}>Edit Raw Item</button>
                             </div>
                         ) : null
                     )}
                 </div>
             )}
-
         </>
     );
 };

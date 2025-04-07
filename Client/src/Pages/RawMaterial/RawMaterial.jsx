@@ -335,7 +335,7 @@ const UpdatedRawMaterial = () => {
                                 <div onClick={() => { setProductEdit((prev) => ({ ...prev, action: false })) }} className="close">X</div>
                                 <div className="div">
                                     <span>Product Image</span><img src={item.imageUrl} alt="" />
-                                    <span>Material Name</span><input onChange={(e) => { setRawData((prev) => ({ ...prev, materialName: e.target.value })) }} value={rawData.materialName || item.name} type="text" placeholder="Material name"/>
+                                    <span>Material Name</span><input onChange={(e) => { setRawData((prev) => ({ ...prev, materialName: e.target.value })) }} value={rawData.materialName || item.name} type="text" placeholder="Material name" />
                                     <span>Color </span><input type="text" value={item.color} />
                                     {/* <span>Quantity </span><input type="text" value={item.quantity} /> */}
                                     <span>Searching Keywords</span> <textarea style={{ fontFamily: "Arial" }} type="text" value={item.description} ></textarea>

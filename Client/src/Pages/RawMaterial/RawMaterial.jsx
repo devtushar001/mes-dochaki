@@ -18,6 +18,7 @@ const UpdatedRawMaterial = () => {
         quantity: 0,
         color: ""
     });
+
     const [searchQuery, setSearchQuery] = useState("All");
 
     const [data, setData] = useState({
@@ -331,16 +332,15 @@ const UpdatedRawMaterial = () => {
                     {rawMaterials.map((item) =>
                         item._id === productEdit.productId ? (
                             <div key={item._id} className="editing-box-container">
-                                <h2>Editing Container</h2>
                                 <div onClick={() => { setProductEdit((prev) => ({ ...prev, action: false })) }} className="close">X</div>
                                 <div className="div">
-                                    <span>Product Image</span> <img src={item.imageUrl} alt="" />
-                                    <span>Material Name</span> <input type="text" value={item.materialName} />
+                                    <span>Product Image</span><img src={item.imageUrl} alt="" />
+                                    <span>Material Name</span><input onChange={(e) => { setRawData((prev) => ({ ...prev, materialName: e.target.value })) }} value={rawData.materialName || item.name} type="text" placeholder="Material name"/>
                                     <span>Color </span><input type="text" value={item.color} />
                                     {/* <span>Quantity </span><input type="text" value={item.quantity} /> */}
-                                    <span>Searching Keywords</span> <textarea style={{fontFamily: "Arial"}} type="text" value={item.description} ></textarea>
+                                    <span>Searching Keywords</span> <textarea style={{ fontFamily: "Arial" }} type="text" value={item.description} ></textarea>
                                 </div>
-                                <button className="btn-submit">Submit</button>
+                                <button className="btn-submit">Edit Raw Item</button>
                             </div>
                         ) : null
                     )}

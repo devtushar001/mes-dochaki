@@ -3,6 +3,7 @@ import './RawMaterial.css';
 import ImageUploader from "../../Component/ImageUploader/ImageUploader";
 import { MesContext } from "../../Context/MesContextProvider";
 import { toast } from "react-toastify";
+import { assets } from "../../Assets/Assets";
 
 const UpdatedRawMaterial = () => {
     const [addNew, setAddNew] = useState(false);
@@ -25,7 +26,13 @@ const UpdatedRawMaterial = () => {
         issuedType: "default",
         message: "",
         quantity: 0
-    })
+    });
+
+    const [productEdit, setProductEdit] = useState({
+        productId: "",
+        action: false,
+    });
+
 
     const fetchProduct = async () => {
         if (!token) setLoginSignup(true);
@@ -55,7 +62,7 @@ const UpdatedRawMaterial = () => {
     }, [backend_url, searchQuery]);
 
     const createRawProduct = async () => {
-        if(!token) setLoginSignup(true)
+        if (!token) setLoginSignup(true)
         try {
             const res = await fetch(`${backend_url}/api/raw-material/create`, {
                 method: 'POST',
@@ -82,7 +89,14 @@ const UpdatedRawMaterial = () => {
     };
 
     const deleteRawProduct = async (id) => {
-        if(!token) setLoginSignup(true)
+        const confirmed = window.confirm(`Are you sure you want to delete the image with ID: ${id}?`);
+        if (!confirmed) return;
+
+        if (!token) {
+            setLoginSignup(true);
+            return;
+        }
+
         try {
             const res = await fetch(`${backend_url}/api/raw-material/delete/${id}`, {
                 method: 'DELETE',
@@ -100,11 +114,13 @@ const UpdatedRawMaterial = () => {
                 return;
             }
 
+            toast.success("Product deleted successfully");
             fetchProduct();
         } catch (error) {
             toast.error(`${error.name}: ${error.message}`);
         }
     };
+
 
     useEffect(() => {
         if (productImage.image) {
@@ -118,7 +134,7 @@ const UpdatedRawMaterial = () => {
     };
 
     const updateRawMaterial = async () => {
-        if(!token) setLoginSignup(true);
+        if (!token) setLoginSignup(true);
         try {
             const res = await fetch(`${backend_url}/api/update-raw/update`, {
                 method: "POST",
@@ -244,7 +260,7 @@ const UpdatedRawMaterial = () => {
                                     <span>{material.description}</span>
                                     <span>{material.quantity}</span>
                                     <span>{material.color}</span>
-                                    <span>
+                                    <span className="btn">
                                         <button
                                             onClick={() => {
                                                 setInOut(true);
@@ -253,7 +269,7 @@ const UpdatedRawMaterial = () => {
                                             }}
                                             className="updated-btn updated-btn-primary"
                                         >
-                                            Update
+                                            In Out
                                         </button>
                                         <button
                                             onClick={() => deleteRawProduct(material._id)}
@@ -262,6 +278,9 @@ const UpdatedRawMaterial = () => {
                                             Delete
                                         </button>
                                     </span>
+                                    <div className="update-product">
+                                        <img onClick={() => { setProductEdit((prev) => ({ ...prev, action: true })); setProductEdit((prev) => ({ ...prev, productId: material._id })) }} src={assets.edit_icon} alt="" />
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -307,6 +326,25 @@ const UpdatedRawMaterial = () => {
                     </div>
                 </div >
             </div > : <></>}
+            {productEdit.action && (
+                <div className="edit-window">
+                    {rawMaterials.map((item) =>
+                        item._id === productEdit.productId ? (
+                            <div key={item._id} className="editing-box-container">
+                                <div className="close">X</div>
+                                <div className="div">
+                                    <span>Product Image</span> <img style={{width: "40px"}} src={item.imageUrl} alt="" />
+                                    <span>Material Name</span> <input type="text" value={item.materialName} />
+                                    <span>Color </span><input type="text" value={item.color} />
+                                    <span>Quantity </span><input type="text" value={item.quantity} />
+                                    <span>Material Name</span> <textarea type="text" value={item.description} ></textarea>
+                                </div>
+                            </div>
+                        ) : null
+                    )}
+                </div>
+            )}
+
         </>
     );
 };

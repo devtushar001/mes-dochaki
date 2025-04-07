@@ -315,12 +315,12 @@ const UpdatedRawMaterial = () => {
                         </select>
                         <select name="issued-type" id="issued-type" onChange={(e) => setData(prev => ({ ...prev, issuedType: e.target.value }))}>
                             <option value="default">Default</option>
-                            <option value="stock">Stock</option>
+                            <option value="others">Other</option>
                             <option value="persion">Person</option>
-                            <option value="offline">Packing room</option>
+                            <option value="packing-room">Packing room</option>
 
                         </select>
-                        <input onChange={(e) => setData(prev => ({ ...prev, message: e.target.value }))} type="text" placeholder="Type message" />
+                        <input onChange={(e) => setData(prev => ({ ...prev, message: e.target.value }))} type="text" placeholder="Issued to" />
                         <input onChange={(e) => setData((prev) => ({ ...prev, quantity: Number(e.target.value) }))} type="number" name="quantity" id="quantity" placeholder="Quantity" />
                         <button onClick={updateRawMaterial}>Submit</button>
                     </div>
@@ -333,7 +333,7 @@ const UpdatedRawMaterial = () => {
                             <div key={item._id} className="editing-box-container">
                                 <div className="close">X</div>
                                 <div className="div">
-                                    <span>Product Image</span> <img style={{width: "40px"}} src={item.imageUrl} alt="" />
+                                    <span>Product Image</span> <img style={{ width: "40px" }} src={item.imageUrl} alt="" />
                                     <span>Material Name</span> <input type="text" value={item.materialName} />
                                     <span>Color </span><input type="text" value={item.color} />
                                     <span>Quantity </span><input type="text" value={item.quantity} />

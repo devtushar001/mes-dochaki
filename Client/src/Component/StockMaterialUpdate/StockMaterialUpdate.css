@@ -22,6 +22,8 @@
     grid-template-columns: 1.3fr 1.2fr 0.5fr 0.5fr 1.5fr;
     grid-template-rows: 1fr;
     gap: 7px;
+    border: 1px solid saddlebrown;
+    padding: 10px;
 }
 
 .recent-update .table .table-head {

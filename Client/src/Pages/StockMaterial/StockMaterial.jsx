@@ -3,7 +3,7 @@ import './StockMaterial.css';
 import ImageUploader from "../../Component/ImageUploader/ImageUploader";
 import { MesContext } from "../../Context/MesContextProvider";
 import { toast } from "react-toastify";
-// import StockMaterialUpdate from '../../Component/StockMaterialUpdate/StockMaterialUpdate'
+import { assets } from "../../Assets/Assets";
 
 const UpdatedRawMaterial = () => {
     const [addNew, setAddNew] = useState(false);
@@ -27,7 +27,9 @@ const UpdatedRawMaterial = () => {
         saleType: "default",
         message: "",
         quantity: 0
-    })
+    });
+
+    const [productEdit, setProductEdit] = useState(false)
 
     const fetchProduct = async () => {
         if (!token) setLoginSignup(true);
@@ -86,6 +88,13 @@ const UpdatedRawMaterial = () => {
     };
 
     const deleteRawProduct = async (id) => {
+        const confirmed = window.confirm(`Are you sure you want to delete the image with ID: ${id}?`);
+        if (!confirmed) return;
+
+        if (!token) {
+            setLoginSignup(true);
+            return;
+        }
         if (!token) setLoginSignup(true)
         try {
             const res = await fetch(`${backend_url}/api/stock-material/delete/${id}`, {
@@ -246,7 +255,7 @@ const UpdatedRawMaterial = () => {
                                     <span>{material.description}</span>
                                     <span>{material.quantity}</span>
                                     <span>{material.color}</span>
-                                    <span>
+                                    <span className="btn">
                                         <button
                                             onClick={() => {
                                                 setInOut(true);
@@ -255,7 +264,7 @@ const UpdatedRawMaterial = () => {
                                             }}
                                             className="updated-btn updated-btn-primary"
                                         >
-                                            Update
+                                            In Out
                                         </button>
                                         <button
                                             onClick={() => deleteRawProduct(material._id)}
@@ -264,6 +273,9 @@ const UpdatedRawMaterial = () => {
                                             Delete
                                         </button>
                                     </span>
+                                    <div className="update-product">
+                                        <img onClick={() => { setProductEdit((prev) => ({ ...prev, action: true })); setProductEdit((prev) => ({ ...prev, productId: material._id })) }} src={assets.edit_icon} alt="" />
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -297,20 +309,38 @@ const UpdatedRawMaterial = () => {
                             <option value="out">out</option>
                         </select>
                         <select name="sale-type" id="sale-type" onChange={(e) => setData(prev => ({ ...prev, saleType: e.target.value }))}>
-                            <option value="default">Default</option>
-                            <option value="dealership">Dealership</option>
+                            <option value="dealership">Website</option>
                             <option value="amazon">Amazon</option>
-                            <option value="flipkart">FlipKart</option>
-                            <option value="dmototech">Dmototeh</option>
-                            <option value="offline">Offline</option>
-                            <option value="raw">Raw</option>
+                            <option value="flipkart">Dealership</option>
+                            <option value="dmototech">Direct Sale</option>
+                            <option value="offline">Return</option>
+                            <option value="raw">New Material</option>
                         </select>
-                        <input onChange={(e) => setData(prev => ({ ...prev, message: e.target.value }))} type="text" placeholder="Type message" />
+                        <input onChange={(e) => setData(prev => ({ ...prev, message: e.target.value }))} type="text" placeholder="Enter address order details." />
                         <input onChange={(e) => setData((prev) => ({ ...prev, quantity: Number(e.target.value) }))} type="number" name="quantity" id="quantity" placeholder="Quantity" />
                         <button onClick={updateRawMaterial}>Submit</button>
                     </div>
                 </div >
             </div > : <></>}
+            {productEdit.action && (
+                <div className="edit-window">
+                    {rawMaterials.map((item) =>
+                        item._id === productEdit.productId ? (
+                            <div key={item._id} className="editing-box-container">
+                                <div className="close">X</div>
+                                <div className="div">
+                                    <span>Product Image</span> <img style={{ width: "40px" }} src={item.imageUrl} alt="" />
+                                    <span>Material Name</span> <input type="text" value={item.materialName} />
+                                    <span>Color </span><input type="text" value={item.color} />
+                                    <span>Quantity </span><input type="text" value={item.quantity} />
+                                    <span>Material Name</span> <textarea type="text" value={item.description} ></textarea>
+                                </div>
+                            </div>
+                        ) : null
+                    )}
+                </div>
+            )}
+
         </>
     );
 };

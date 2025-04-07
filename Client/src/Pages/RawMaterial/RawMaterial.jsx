@@ -331,14 +331,16 @@ const UpdatedRawMaterial = () => {
                     {rawMaterials.map((item) =>
                         item._id === productEdit.productId ? (
                             <div key={item._id} className="editing-box-container">
-                                <div className="close">X</div>
+                                <h2>Editing Container</h2>
+                                <div onClick={() => { setProductEdit((prev) => ({ ...prev, action: false })) }} className="close">X</div>
                                 <div className="div">
-                                    <span>Product Image</span> <img style={{ width: "40px" }} src={item.imageUrl} alt="" />
+                                    <span>Product Image</span> <img src={item.imageUrl} alt="" />
                                     <span>Material Name</span> <input type="text" value={item.materialName} />
                                     <span>Color </span><input type="text" value={item.color} />
-                                    <span>Quantity </span><input type="text" value={item.quantity} />
-                                    <span>Material Name</span> <textarea type="text" value={item.description} ></textarea>
+                                    {/* <span>Quantity </span><input type="text" value={item.quantity} /> */}
+                                    <span>Searching Keywords</span> <textarea style={{fontFamily: "Arial"}} type="text" value={item.description} ></textarea>
                                 </div>
+                                <button className="btn-submit">Submit</button>
                             </div>
                         ) : null
                     )}

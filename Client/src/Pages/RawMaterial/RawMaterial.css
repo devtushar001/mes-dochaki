@@ -174,6 +174,7 @@
 }
 
 .edit-window {
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -188,13 +189,51 @@
 }
 
 .editing-box-container {
+    width: 570px;
     border: 1px solid black;
-    padding: 30px;
+    padding: 15px;
+    background: #ffffff;
+    position: relative;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin-top: 120px;
+}
+
+.editing-box-container .close {
+    position: absolute;
+    top: 10px;
+    cursor: pointer;
+    right: 15px;
 }
 
 .editing-box-container .div {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.editing-box-container .btn-submit {
+    margin-top: 30px;
+    width: 100%;
+    height: 35px;
+    cursor: pointer;
+    border: 1px solid #0fa79f;
+    background-color: #0fa79f;
+    color: #fff;
+}
+
+.editing-box-container .div img {
+    max-width: 100px;
+}
+
+.editing-box-container input,
+.editing-box-container textarea {
+    outline: none;
+    border: 1px solid #0fa79f;
+    padding: 5px 8px;
+}
+
+.editing-box-container input:focus {
+    border-color: #38b2ac;
 }
 
 @media (max-width: 680px) {
@@ -218,5 +257,10 @@
     .updated-add-new-raw-material .updated-material-name {
         grid-template-columns: 1fr;
         margin-bottom: 10px;
+    }
+
+    .editing-box-container {
+        margin-top: 120px;
+        width: 240px;
     }
 }

@@ -29,9 +29,8 @@ const RawMaterialUpdate = () => {
         } catch (error) {
             console.error("Error fetching updates:", error.message);
         }
-    }, [inputDate, backend_url]); // Dependencies: inputDate, backend_url
+    }, [inputDate, backend_url]);
 
-    // Fetch Data on Component Mount (Only Once)
     useEffect(() => {
         fetchRecentUpdate();
     }, [fetchRecentUpdate]);

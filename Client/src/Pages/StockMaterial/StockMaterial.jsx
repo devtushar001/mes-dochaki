@@ -412,7 +412,7 @@ const UpdatedRawMaterial = () => {
                                     />
                                 </div>
 
-                                <button className="btn-submit" onClick={() => updateStockProductsData(item._id)}>Edit Raw Item</button>
+                                <button className="btn-submit" onClick={() => updateStockProductsData(item._id)}>Edit Stock Item</button>
                             </div>
                         ) : null
                     )}

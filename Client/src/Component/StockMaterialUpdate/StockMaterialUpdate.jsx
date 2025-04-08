@@ -62,7 +62,7 @@ const StockMaterialUpdate = () => {
                             <span>Product Name</span>
                             <span>Curr. Qty</span>
                             <span>In/Out Qty</span>
-                            <span>Description</span>
+                            <span>Message</span>
                             <span>Updated At</span>
                         </div>
                         {fetchedData.map((update) => (

@@ -131,7 +131,6 @@ export const updateRawMaterialController = async (req, res) => {
         if (materialName) updateFields.materialName = materialName;
         if (description) updateFields.description = description;
         if (color) updateFields.color = color;
-        if (quantity !== undefined) updateFields.quantity = quantity;
         if (imageUrl) updateFields.imageUrl = imageUrl;
 
         const updatedProduct = await RawModel.findByIdAndUpdate(

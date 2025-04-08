@@ -126,3 +126,48 @@ export const deleteStockMaterialController = async (req, res) => {
         });
     }
 };
+
+export const updateStockMaterialController = async (req, res) => {
+    console.log(req.body)
+    try {
+        const { productId, materialName, description, color, quantity, imageUrl } = req.body;
+
+        if (!productId) {
+            return res.status(400).json({
+                success: false,
+                message: `Product ID not provided.`
+            });
+        }
+
+        const updateFields = {};
+        if (materialName) updateFields.materialName = materialName;
+        if (description) updateFields.description = description;
+        if (color) updateFields.color = color;
+        if (imageUrl) updateFields.imageUrl = imageUrl;
+
+        const updatedProduct = await StockModel.findByIdAndUpdate(
+            productId,
+            updateFields,
+            { new: true }
+        );
+
+        if (!updatedProduct) {
+            return res.status(404).json({
+                success: false,
+                message: `No product found with the provided ID.`
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: `Raw material updated successfully.`,
+            updatedProduct
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: `Error: ${error.name} - ${error.message}`
+        });
+    }
+};
